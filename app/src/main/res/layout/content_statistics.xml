@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.garrett.ultimatev2.StatisticsActivity"
+    tools:showIn="@layout/activity_statistics"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scoreHolder">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView2"
+
+            >
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/horizontalScrollView" >
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table"
+                    >
+                </TableLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/scoreHolder"
+        android:layout_alignParentTop="true"
+        >
+
+        <View android:id="@+id/fakeView4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Home Team"
+            android:id="@+id/textViewHomeTeam2"
+            android:gravity="right|bottom"
+            android:maxLines="2"
+            android:textSize="22dp"
+            android:paddingRight="2dp"
+            android:layout_alignBottom="@+id/fakeView4"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/fakeView4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Opponent"
+            android:id="@+id/textViewOpponent2"
+            android:gravity="left|bottom"
+            android:maxLines="2"
+            android:textSize="22dp"
+            android:paddingLeft="2dp"
+            android:layout_alignTop="@+id/textViewHomeTeam2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/textViewHomeTeam2"
+            android:layout_toEndOf="@+id/textViewDash2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="-"
+            android:id="@+id/textViewDash2"
+            android:layout_alignTop="@+id/textViewHomeScore2"
+            android:layout_alignStart="@+id/fakeView4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:textSize="30dp"
+            android:id="@+id/textViewHomeScore2"
+            android:gravity="right"
+            android:paddingRight="6dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/textViewDash2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:textSize="30dp"
+            android:id="@+id/textViewOpponentScore2"
+            android:gravity="left"
+            android:paddingLeft="6dp"
+            android:layout_alignTop="@+id/textViewDash2"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textViewDash2" />
+    </RelativeLayout>
+
+</RelativeLayout>

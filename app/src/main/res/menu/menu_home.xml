@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.garrett.ultimatev2.HomeActivity">
+    <item
+        android:id="@+id/finishGame"
+        android:orderInCategory="100"
+        android:title="Finish Game"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/statSheet"
+        android:orderInCategory="100"
+        android:title="Stat Sheet"
+        app:showAsAction="never" />
+</menu>

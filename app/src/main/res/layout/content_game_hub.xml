@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.garrett.ultimatev2.GameHubActivity"
+    tools:showIn="@layout/activity_game_hub">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/frameLayout2"
+        android:layout_alignEnd="@+id/fakeView">
+
+        <View android:id="@+id/fakeView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+
+        <Chronometer
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="50dp"
+            android:id="@+id/chronometer"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
+    </RelativeLayout>
+
+    <View android:id="@+id/fakeView"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_centerInParent="true"/>
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Reset"-->
+        <!--android:textSize="22dp"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:id="@+id/buttonReset"-->
+        <!--android:layout_below="@+id/buttonStartPause"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignEnd="@+id/buttonStartPause" />-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assist"
+        android:id="@+id/buttonAssist"
+        android:textSize="22dp"
+        android:textAllCaps="false"
+        android:layout_above="@+id/buttonD"
+        android:layout_alignEnd="@+id/fakeView"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&quot;D&quot;"
+        android:id="@+id/buttonD"
+        android:textSize="22dp"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/fakeView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drop"
+        android:id="@+id/buttonDrop"
+        android:textSize="22dp"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/buttonOpponentScore"
+        android:layout_toEndOf="@+id/fakeView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Throwaway"
+        android:id="@+id/buttonThrowaway"
+        android:textSize="22dp"
+        android:textAllCaps="false"
+        android:layout_alignTop="@+id/buttonAssist"
+        android:layout_alignStart="@+id/buttonOpponentScore"
+        android:layout_alignEnd="@+id/buttonDrop" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score"
+        android:id="@+id/buttonScore"
+        android:textSize="22dp"
+        android:textAllCaps="false"
+        android:layout_above="@+id/buttonAssist"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/fakeView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scored On"
+        android:id="@+id/buttonOpponentScore"
+        android:textSize="22dp"
+        android:textAllCaps="false"
+        android:layout_alignTop="@+id/buttonScore"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/fakeView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Game Log:"
+        android:id="@+id/textView12"
+        android:textSize="22dp"
+        android:layout_below="@+id/buttonUndo"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:fillViewport="true"
+        android:background="@drawable/border"
+        android:layout_below="@+id/textView12"
+        android:layout_above="@+id/buttonScore">
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_above="@+id/buttonScore"
+             android:textAppearance="?android:attr/textAppearanceLarge"
+             android:id="@+id/textViewGameLog"
+             android:textSize="22dp"
+             android:scrollbars="vertical"
+             android:padding="@dimen/text_margin"
+ />
+            <!--android:gravity="bottom"-->
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/frameLayout2"
+        android:layout_toEndOf="@+id/fakeView"
+        android:id="@+id/relativeLayout"
+        android:layout_above="@+id/textView12">
+
+        <View android:id="@+id/fakeView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Home Team"
+            android:id="@+id/textViewHomeTeam"
+            android:gravity="right|bottom"
+            android:maxLines="2"
+            android:textSize="15dp"
+            android:paddingRight="2dp"
+            android:layout_alignBottom="@+id/fakeView2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/fakeView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Opponent"
+            android:id="@+id/textViewOpponent"
+            android:gravity="left|bottom"
+            android:maxLines="2"
+            android:textSize="15dp"
+            android:paddingLeft="2dp"
+            android:layout_alignTop="@+id/textViewHomeTeam"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/textViewHomeTeam"
+            android:layout_toEndOf="@+id/textViewDash" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="-"
+            android:id="@+id/textViewDash"
+            android:layout_alignTop="@+id/textViewHomeScore"
+            android:layout_alignStart="@+id/fakeView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:textSize="30dp"
+            android:id="@+id/textViewHomeScore"
+            android:gravity="right"
+            android:paddingRight="6dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/textViewDash" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:textSize="30dp"
+            android:id="@+id/textViewOpponentScore"
+            android:gravity="left"
+            android:paddingLeft="6dp"
+            android:layout_alignTop="@+id/textViewDash"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textViewDash" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Undo"
+        android:id="@+id/buttonUndo"
+        android:textSize="22dp"
+        android:textAllCaps="false"
+        android:layout_below="@+id/frameLayout2"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/fakeView" />
+
+
+</RelativeLayout>
+

@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="horizontal"
+    android:showDividers="middle"
+    android:choiceMode="singleChoice"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    tools:context="com.example.garrett.ultimatev2.TeamListActivity">
+
+    <!--
+    This layout is a two-pane layout for the Teams
+    master/detail flow.
+    
+    -->
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/team_list"
+        android:name="com.example.garrett.ultimatev2.TeamListFragment"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.example.garrett.ultimatev2.TeamListActivity"
+        tools:listitem="@layout/team_list_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentStart="true" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="#8fa6c8"
+        android:layout_toStartOf="@+id/team_detail_container" />
+    <FrameLayout
+        android:id="@+id/team_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/team_list"
+        ></FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white_48px"
+        android:nestedScrollingEnabled="true"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/team_detail_container"
+        android:layout_margin="16dp" />
+
+    <!--<FrameLayout
+        android:id="@+id/team_detail_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3.23"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="466dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
+        -->
+
+
+</RelativeLayout>

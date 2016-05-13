@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Ulti-MATE</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_team_list">Teams</string>
+    <string name="title_team_detail">Team Detail</string>
+    <string name="title_activity_game_hub">GameHubActivity</string>
+    <string name="layout">image</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_statistics">StatisticsActivity</string>
+</resources>
