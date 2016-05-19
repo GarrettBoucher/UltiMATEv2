@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +38,7 @@ public class GameHubActivity extends AppCompatActivity {
     ArrayList<String> teamString;
     DBHandler dbHandler = new DBHandler(this, null, null, 1);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,20 +60,25 @@ public class GameHubActivity extends AppCompatActivity {
             chronometer.setBase(globalVariable.getStartTime());
             chronometer.start();
         }
-        if(globalVariable.getCurrentGame()==null){//if there is not a game going on, make one
-            preGameLogic();
-        }
-        if(globalVariable.isParametersDefined()){
+
+        if(globalVariable.isParametersDefined() && globalVariable.getCurrentGame()==null){//parameters have already been collected from  user
             startDialog();
-            globalVariable.setParametersDefined(false);
+
         }
-        toolbar.setTitle(globalVariable.getCurrentGame().get_gamename());
+        if(!globalVariable.isParametersDefined() && globalVariable.getCurrentGame()==null){//this is the first time the user clicks 'Play Game'
+            preGameLogic();//since there is not a game going on, make one
+        }
+        if(!globalVariable.isParametersDefined() && globalVariable.getCurrentGame()!=null ){//the user is returning to a game already taking place
+            printDatabaseLogEvents();
+            printScoreDisplay();
+        }
+
+        toolbar.setTitle(globalVariable.getGameTitle());
         TextView homeTeam = (TextView)findViewById(R.id.textViewHomeTeam);
         homeTeam.setText(globalVariable.getCurrentTeamName());
         TextView awayTeam = (TextView)findViewById(R.id.textViewOpponent);
-        awayTeam.setText(globalVariable.getCurrentGame().get_opponent());
-        printDatabaseLogEvents();
-        printScoreDisplay();
+        awayTeam.setText(globalVariable.getOpponentName());
+
 
         Button buttonDrop =      (Button) findViewById(R.id.buttonDrop);
         Button buttonScore =     (Button) findViewById(R.id.buttonScore);
@@ -427,17 +434,9 @@ public class GameHubActivity extends AppCompatActivity {
     }
 
     public void preGameLogic(){
-        final Globals globalVariable = (Globals) getApplicationContext();
-        //create new game and set it
-        Games game = new Games();
-        game = dbHandler.addGame(game);
-        globalVariable.setCurrentGame(game);
-
-        chooseTeam();//ask for team to play with
+        chooseTeam();      //ask for team to play with
 //        chooseOpponent();//ask for opponent name
 //        chooseGameName();//ask for game name
-
-
 
     }
 
@@ -474,14 +473,34 @@ public class GameHubActivity extends AppCompatActivity {
         View promptView = layoutInflater.inflate(R.layout.dialog_team_list, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GameHubActivity.this);
         alertDialogBuilder.setView(promptView);
-        alertDialogBuilder.setCancelable(false);
+//        alertDialogBuilder.setCancelable(false);
+
+        final AlertDialog alert = alertDialogBuilder.create();
+        alert.setCanceledOnTouchOutside(false);
+
+
+        alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+//                alert.dismiss();
+                globalVariable.setCurrentGame(null);
+                globalVariable.setCurrentTeamName(null);
+                globalVariable.setSelectedPlayer(null);
+                globalVariable.setClockTicking(false);
+                globalVariable.setParametersDefined(false);
+                globalVariable.setStartTime(0);
+//                alert.dismiss();
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         TextView title = (TextView) promptView.findViewById(R.id.textViewTitle);
         title.setText("Your Team: ");
 
 
         // create an alert dialog
-        final AlertDialog alert = alertDialogBuilder.create();
+
         alert.show();
 
         final ListView listView = (ListView) promptView.findViewById(R.id.listViewTeams);
@@ -492,7 +511,7 @@ public class GameHubActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 globalVariable.setCurrentTeamName(listView.getItemAtPosition(position).toString());
-                dbHandler.setTeamName(globalVariable.getCurrentGame(), globalVariable.getCurrentTeamName());
+//                dbHandler.setTeamName(globalVariable.getCurrentGame(), globalVariable.getCurrentTeamName());
                 alert.dismiss();
                 chooseOpponent();
             }
@@ -505,7 +524,6 @@ public class GameHubActivity extends AppCompatActivity {
         View promptView = layoutInflater.inflate(R.layout.dialog_input, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GameHubActivity.this);
         alertDialogBuilder.setView(promptView);
-        alertDialogBuilder.setCancelable(false);
 
 
         TextView title = (TextView) promptView.findViewById(R.id.textPrompt);
@@ -513,22 +531,26 @@ public class GameHubActivity extends AppCompatActivity {
         final EditText input = (EditText) promptView.findViewById(R.id.editTextInput);
         input.setHint("Opponent Name");
 
-        alertDialogBuilder.setCancelable(false)
+
+        alertDialogBuilder
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                String inputOpponentName = input.getText().toString();
-                if(inputOpponentName.contains("'")||inputOpponentName.contains("\"")){
-                    Toast.makeText(getApplicationContext(),"Please input a name without special characters",Toast.LENGTH_LONG).show();
-                    chooseOpponent();
-                }else {
-                    dbHandler.setOpponentName(globalVariable.getCurrentGame(), inputOpponentName);
-                    chooseGameName();
-                }
+                 globalVariable.setOpponentName(input.getText().toString());
+//                dbHandler.setOpponentName(globalVariable.getCurrentGame(), inputOpponentName);
+                chooseGameName();
             }
         });
 
         // create an alert dialog
         final AlertDialog alert = alertDialogBuilder.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                chooseTeam();
+            }
+        });
+
         alert.show();
     }
 
@@ -538,7 +560,6 @@ public class GameHubActivity extends AppCompatActivity {
         View promptView = layoutInflater.inflate(R.layout.dialog_input, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GameHubActivity.this);
         alertDialogBuilder.setView(promptView);
-        alertDialogBuilder.setCancelable(false);
 
 
         TextView title = (TextView) promptView.findViewById(R.id.textPrompt);
@@ -547,7 +568,7 @@ public class GameHubActivity extends AppCompatActivity {
         input.setHint("Game Title");
 
 
-        alertDialogBuilder.setCancelable(false)
+        alertDialogBuilder
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String inputGameTitle = input.getText().toString();
@@ -561,14 +582,17 @@ public class GameHubActivity extends AppCompatActivity {
                                 Log.i("inputGameTitle", inputGameTitle);
                             }
                             Log.i("inputGameTitle", inputGameTitle);
-                            dbHandler.setGameName(globalVariable.getCurrentGame(), inputGameTitle);
+
+                            globalVariable.setGameTitle(inputGameTitle);
+//                            dbHandler.setGameName(globalVariable.getCurrentGame(), inputGameTitle);
+
 
                             //create performances
-                            playerString = dbHandler.getPlayersArrayList(globalVariable.getCurrentTeamName());
-                            for (int i = 0; i < playerString.size(); i++) {//add a performance for each player on the team
-                                dbHandler.addPerformance(playerString.get(i),globalVariable.getCurrentTeamName(),globalVariable.getCurrentGame());
-                            }
-
+//                            playerString = dbHandler.getPlayersArrayList(globalVariable.getCurrentTeamName());
+//                            for (int i = 0; i < playerString.size(); i++) {//add a performance for each player on the team
+//                                dbHandler.addPerformance(playerString.get(i),globalVariable.getCurrentTeamName(),globalVariable.getCurrentGame());
+//                            }
+//
                             globalVariable.setParametersDefined(true);
                             //refresh the view
                             Intent intent = getIntent();
@@ -581,8 +605,17 @@ public class GameHubActivity extends AppCompatActivity {
                     }
                 });
 
+
         // create an alert dialog
         final AlertDialog alert = alertDialogBuilder.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                chooseOpponent();
+            }
+        });
+
         alert.show();
     }
 
@@ -592,7 +625,6 @@ public class GameHubActivity extends AppCompatActivity {
         View promptView = layoutInflater.inflate(R.layout.dialog_start, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GameHubActivity.this);
         alertDialogBuilder.setView(promptView);
-        alertDialogBuilder.setCancelable(false);
 
 
         TextView title = (TextView) promptView.findViewById(R.id.textPrompt2);
@@ -601,12 +633,34 @@ public class GameHubActivity extends AppCompatActivity {
 
         // create an alert dialog
         final AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
+        alert.setCanceledOnTouchOutside(false);
+
 
         Button buttonStart = (Button) promptView.findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            //set the game parameters
+                final Globals globalVariable = (Globals) getApplicationContext();
+                //create new game and set it
+                Games game = new Games();
+                game = dbHandler.addGame(game);
+                globalVariable.setCurrentGame(game);
+                //set team name
+                dbHandler.setTeamName(globalVariable.getCurrentGame(), globalVariable.getCurrentTeamName());
+                //set opponent name
+                dbHandler.setOpponentName(globalVariable.getCurrentGame(), globalVariable.getOpponentName());
+                //set game name
+                dbHandler.setGameName(globalVariable.getCurrentGame(), globalVariable.getGameTitle());
+                //make performances
+                playerString = dbHandler.getPlayersArrayList(globalVariable.getCurrentTeamName());
+                            for (int i = 0; i < playerString.size(); i++) {//add a performance for each player on the team
+                                dbHandler.addPerformance(playerString.get(i),globalVariable.getCurrentTeamName(),globalVariable.getCurrentGame());
+                            }
+
+                globalVariable.setParametersDefined(false);
+
+                //set the clock
                 alert.dismiss();
                 timeWhenStopped = 0;
                 globalVariable.setStartTime(SystemClock.elapsedRealtime());
@@ -615,8 +669,14 @@ public class GameHubActivity extends AppCompatActivity {
                 chronometer.start();
             }
         });
+        alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                chooseTeam();
+            }
+        });
 
-
+        alert.show();
     }
 
     public void postGameLogic(){

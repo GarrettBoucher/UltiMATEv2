@@ -8,15 +8,34 @@ import android.widget.Chronometer;
  */
 public class Globals extends Application {
     private String currentTeamName;
+    private String opponentName;
+    private String gameTitle;
     private boolean clockTicking = false;
     private String selectedPlayer;
     private Games currentGame = null;
     private boolean parametersDefined = false;
     private long startTime = 0;
+    //Viewing Globals
     private String viewTeamName;
     private Games viewGame = null;
     private boolean viewParametersDefined = false;
     private String title;
+
+    public String getOpponentName() {
+        return opponentName;
+    }
+
+    public void setOpponentName(String opponentName) {
+        this.opponentName = opponentName;
+    }
+
+    public String getGameTitle() {
+        return gameTitle;
+    }
+
+    public void setGameTitle(String gameTitle) {
+        this.gameTitle = gameTitle;
+    }
 
     public String getTitle() {
         return title;
