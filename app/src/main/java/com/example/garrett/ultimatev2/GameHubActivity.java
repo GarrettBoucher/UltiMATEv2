@@ -565,7 +565,7 @@ public class GameHubActivity extends AppCompatActivity {
         TextView title = (TextView) promptView.findViewById(R.id.textPrompt);
         title.setText("Enter a title for this game: ");
         final EditText input = (EditText) promptView.findViewById(R.id.editTextInput);
-        input.setHint("Game Title");
+        input.setHint("VS. "+ globalVariable.getOpponentName());
 
 
         alertDialogBuilder
