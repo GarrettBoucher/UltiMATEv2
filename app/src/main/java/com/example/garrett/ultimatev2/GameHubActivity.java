@@ -719,6 +719,7 @@ public class GameHubActivity extends AppCompatActivity {
     public void goToStatSheet(){
         Globals globalVariable = (Globals) getApplicationContext();
         globalVariable.setViewGame(globalVariable.getCurrentGame());
+        globalVariable.setTitle(globalVariable.getGameTitle());
         globalVariable.setViewTeamName(globalVariable.getCurrentTeamName());
         globalVariable.setViewParametersDefined(true);
 
