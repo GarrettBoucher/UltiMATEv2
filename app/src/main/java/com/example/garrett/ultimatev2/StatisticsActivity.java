@@ -11,6 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -78,6 +81,29 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Globals globalVariable = (Globals) getApplicationContext();
+        if(globalVariable.getCurrentGame()!=null){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_statistics, menu);
+            return true;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.returnToGame:
+                returnToGame();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void chooseTeam(){
@@ -215,5 +241,14 @@ public class StatisticsActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void returnToGame(){
+        Globals globalVariable = (Globals) getApplicationContext();
+        globalVariable.setViewTeamName(null);
+        globalVariable.setViewGame(null);
+        globalVariable.setViewParametersDefined(false);
+        Intent intent = new Intent(this, GameHubActivity.class);
+        startActivity(intent);
     }
 }

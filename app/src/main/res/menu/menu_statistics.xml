@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.garrett.ultimatev2.HomeActivity">
+    <item
+        android:id="@+id/returnToGame"
+        android:orderInCategory="100"
+        android:title="Return to Game"
+        app:showAsAction="never" />
+</menu>

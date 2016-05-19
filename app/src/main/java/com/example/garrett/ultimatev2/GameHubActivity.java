@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -128,7 +127,7 @@ public class GameHubActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_home, menu);
+        inflater.inflate(R.menu.menu_game_hub, menu);
         return true;
     }
 
@@ -535,7 +534,12 @@ public class GameHubActivity extends AppCompatActivity {
         alertDialogBuilder
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                 globalVariable.setOpponentName(input.getText().toString());
+                String inputOpponent = input.getText().toString();
+                if(input.getText().toString().isEmpty()){
+                    inputOpponent="Opponent";
+                    Log.i("inputOpponent", inputOpponent);
+                }
+                 globalVariable.setOpponentName(inputOpponent);
 //                dbHandler.setOpponentName(globalVariable.getCurrentGame(), inputOpponentName);
                 chooseGameName();
             }
