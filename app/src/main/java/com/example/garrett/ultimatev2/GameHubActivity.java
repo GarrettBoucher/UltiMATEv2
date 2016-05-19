@@ -573,20 +573,16 @@ public class GameHubActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         String inputGameTitle = input.getText().toString();
                         Log.i("inputGameTitle", inputGameTitle);
-                        if(inputGameTitle.contains("'")||inputGameTitle.contains("\"")){
-                            Toast.makeText(getApplicationContext(),"Please input a name without special characters",Toast.LENGTH_LONG).show();
-                            chooseGameName();
-                        }else {
-                            if(inputGameTitle==""){
-                                inputGameTitle=globalVariable.getCurrentGame().get_opponent();
-                                Log.i("inputGameTitle", inputGameTitle);
-                            }
+
+                        if(inputGameTitle.isEmpty()){
+                            inputGameTitle="VS. "+globalVariable.getOpponentName();
+                            Log.i("inputGameTitle", inputGameTitle);
+                        }
                             Log.i("inputGameTitle", inputGameTitle);
 
                             globalVariable.setGameTitle(inputGameTitle);
+
 //                            dbHandler.setGameName(globalVariable.getCurrentGame(), inputGameTitle);
-
-
                             //create performances
 //                            playerString = dbHandler.getPlayersArrayList(globalVariable.getCurrentTeamName());
 //                            for (int i = 0; i < playerString.size(); i++) {//add a performance for each player on the team
@@ -600,7 +596,7 @@ public class GameHubActivity extends AppCompatActivity {
                             finish();
                             startActivity(intent);
 
-                        }
+
 
                     }
                 });
@@ -672,7 +668,7 @@ public class GameHubActivity extends AppCompatActivity {
         alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                chooseTeam();
+                chooseGameName();
             }
         });
 
