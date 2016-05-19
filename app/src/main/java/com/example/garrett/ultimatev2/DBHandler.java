@@ -201,7 +201,7 @@ public class DBHandler extends SQLiteOpenHelper {
         TeamContent.ITEM_MAP = new HashMap<String, TeamContent.TeamItem>();
 
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_TEAMS + " Where 1";
+        String query = "SELECT * FROM " + TABLE_TEAMS + " ORDER BY "+COLUMN_TEAMS_TEAMNAME+" ASC";
 
         //Cursor point to a location in your results
         Cursor c = db.rawQuery(query, null);
@@ -298,7 +298,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ArrayList<String> teamString = new ArrayList<>();
 
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_TEAMS + " Where 1";
+        String query = "SELECT * FROM " + TABLE_TEAMS + " ORDER BY "+COLUMN_TEAMS_TEAMNAME+" ASC";
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
 
@@ -321,7 +321,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ArrayList<String> playerString = new ArrayList<>();
 
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_PLAYERS + " Where "+ COLUMN_PLAYERS_TEAMNAME+" = '"+teamName+"'";
+        String query = "SELECT * FROM " + TABLE_PLAYERS + " Where "+ COLUMN_PLAYERS_TEAMNAME+" = '"+teamName+"' ORDER BY "+COLUMN_PLAYERS_PLAYERNAME+" ASC";
 
         Cursor c = db.rawQuery(query, null);
 
