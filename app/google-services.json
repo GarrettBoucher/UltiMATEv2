@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "956594490988",
+    "firebase_url": "https://ulti-mate-9a1dd.firebaseio.com",
+    "project_id": "ulti-mate-9a1dd",
+    "storage_bucket": "ulti-mate-9a1dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956594490988:android:ff0a14f7ae3ccbfd",
+        "android_client_info": {
+          "package_name": "com.example.garrett.ultimatev2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956594490988-ar8155i311is1su7p9qhcj0mnr3aosn3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.garrett.ultimatev2",
+            "certificate_hash": "4E476D82239815DE1751F85C9146E04DC1597F6B"
+          }
+        },
+        {
+          "client_id": "956594490988-5ev83r030cgaj2sib3m4a1a6qvsq1bl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQixja-eID8vkIdnZjqfaW_Zej2CoIBeI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956594490988-5ev83r030cgaj2sib3m4a1a6qvsq1bl7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
