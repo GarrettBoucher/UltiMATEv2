@@ -106,6 +106,16 @@ public class StatisticsActivity extends AppCompatActivity {
         }
     }
 
+//    @Override
+//    public void onBackPressed()
+//    {
+//        super.onBackPressed();
+//        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(intent);
+//    }
+
     public void chooseTeam(){
         final Globals globalVariable = (Globals) getApplicationContext();
         LayoutInflater layoutInflater = LayoutInflater.from(StatisticsActivity.this);
