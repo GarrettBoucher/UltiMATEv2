@@ -59,6 +59,7 @@ public class TeamListActivity extends AppCompatActivity {
         final Globals globalVariable = (Globals) getApplicationContext();
         dbHandler = new DBHandler(this, null, null, 1);
         dbHandler.putTeamsInList();
+        FloatingActionButton fabTeam;
 
         if (findViewById(R.id.team_detail_container) != null) {
             // The detail container view will be present only in the
@@ -66,31 +67,15 @@ public class TeamListActivity extends AppCompatActivity {
             // If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
-
-
-        }else{
-//            globalVariable.setFragmentPopulated(false);
-        }
-//        Toast.makeText(TeamListActivity.this, "TwoPane: " + mTwoPane, Toast.LENGTH_LONG).show();
-//        View view = (RecyclerView) findViewById(R.id.team_list);
-//        view.performClick();
-
-        FloatingActionButton fabTeam;
-        FloatingActionButton fabPlayer;
-        if(mTwoPane){
             fabTeam = (FloatingActionButton) findViewById(R.id.fabLeft);
             addTeamFAB(fabTeam);
-//            fabPlayer = (FloatingActionButton) findViewById(R.id.fabRight);
-//            addPlayerFAB(fabPlayer);
-
-//            if(!globalVariable.getFragmentPopulated()) {
-//                fabPlayer.setVisibility(View.INVISIBLE);
-//            }
         }else{
             fabTeam = (FloatingActionButton) findViewById(R.id.fabRight);
             addTeamFAB(fabTeam);
             fabTeam.setVisibility(View.VISIBLE);
         }
+//        Toast.makeText(TeamListActivity.this, "TwoPane: " + mTwoPane, Toast.LENGTH_LONG).show();
+
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -102,7 +87,6 @@ public class TeamListActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 //        recyclerView.performClick();
-
 
     }
 
@@ -299,7 +283,7 @@ public class TeamListActivity extends AppCompatActivity {
                                     //add player to Database
                                     Players player = new Players(inputPlayerName, globalVariable.getCurrentTeamName());
                                     dbHandler.addPlayer(player);
-                                    dbHandler.putTeamsInList();
+//                                    dbHandler.putTeamsInList();
                                     Toast.makeText(TeamListActivity.this,inputPlayerName+" successfully added", Toast.LENGTH_LONG).show();
                                 }else{
                                     Toast.makeText(TeamListActivity.this,inputPlayerName+" already exists on this team", Toast.LENGTH_LONG).show();
