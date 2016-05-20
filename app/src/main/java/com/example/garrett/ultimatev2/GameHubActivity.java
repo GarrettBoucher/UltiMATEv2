@@ -490,6 +490,8 @@ public class GameHubActivity extends AppCompatActivity {
                 globalVariable.setStartTime(0);
 //                alert.dismiss();
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
@@ -582,9 +584,9 @@ public class GameHubActivity extends AppCompatActivity {
                             inputGameTitle="VS. "+globalVariable.getOpponentName();
                             Log.i("inputGameTitle", inputGameTitle);
                         }
-                            Log.i("inputGameTitle", inputGameTitle);
+                        Log.i("inputGameTitle", inputGameTitle);
 
-                            globalVariable.setGameTitle(inputGameTitle);
+                        globalVariable.setGameTitle(inputGameTitle);
 
 //                            dbHandler.setGameName(globalVariable.getCurrentGame(), inputGameTitle);
                             //create performances
@@ -593,12 +595,12 @@ public class GameHubActivity extends AppCompatActivity {
 //                                dbHandler.addPerformance(playerString.get(i),globalVariable.getCurrentTeamName(),globalVariable.getCurrentGame());
 //                            }
 //
-                            globalVariable.setParametersDefined(true);
-                            //refresh the view
-                            Intent intent = getIntent();
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                            finish();
-                            startActivity(intent);
+                        globalVariable.setParametersDefined(true);
+                        //refresh the view
+                        Intent intent = getIntent();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        finish();
+                        startActivity(intent);
 
 
 
@@ -714,6 +716,8 @@ public class GameHubActivity extends AppCompatActivity {
                 globalVariable.setStartTime(0);
                 alert.dismiss();
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
