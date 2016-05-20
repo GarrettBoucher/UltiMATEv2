@@ -42,6 +42,7 @@
         android:nestedScrollingEnabled="true"
         app:layout_anchor="@+id/frameLayout"
         app:layout_anchorGravity="bottom|right|end"
+        android:visibility="invisible"
         />
 
 

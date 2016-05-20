@@ -60,7 +60,7 @@ public class TeamDetailActivity extends AppCompatActivity {
 
                 final EditText editText = (EditText) promptView.findViewById(R.id.editText2);
                 // setup a dialog window
-                alertDialogBuilder.setCancelable(false)
+                alertDialogBuilder.setCancelable(true)
                         .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 inputPlayerName = editText.getText().toString();

@@ -71,7 +71,7 @@ public class TeamListActivity extends AppCompatActivity {
         }else{
 //            globalVariable.setFragmentPopulated(false);
         }
-
+//        Toast.makeText(TeamListActivity.this, "TwoPane: " + mTwoPane, Toast.LENGTH_LONG).show();
 //        View view = (RecyclerView) findViewById(R.id.team_list);
 //        view.performClick();
 
@@ -80,14 +80,16 @@ public class TeamListActivity extends AppCompatActivity {
         if(mTwoPane){
             fabTeam = (FloatingActionButton) findViewById(R.id.fabLeft);
             addTeamFAB(fabTeam);
-            fabPlayer = (FloatingActionButton) findViewById(R.id.fabRight);
-            addPlayerFAB(fabPlayer);
+//            fabPlayer = (FloatingActionButton) findViewById(R.id.fabRight);
+//            addPlayerFAB(fabPlayer);
+
 //            if(!globalVariable.getFragmentPopulated()) {
 //                fabPlayer.setVisibility(View.INVISIBLE);
 //            }
         }else{
             fabTeam = (FloatingActionButton) findViewById(R.id.fabRight);
             addTeamFAB(fabTeam);
+            fabTeam.setVisibility(View.VISIBLE);
         }
 
         // Show the Up button in the action bar.
@@ -168,6 +170,11 @@ public class TeamListActivity extends AppCompatActivity {
                         selectedPos = position;
                         notifyItemChanged(selectedPos);
 
+                        FloatingActionButton fabPlayer;
+                        fabPlayer = (FloatingActionButton) findViewById(R.id.fabRight);
+                        addPlayerFAB(fabPlayer);
+                        fabPlayer.setVisibility(View.VISIBLE);
+
                         Bundle arguments = new Bundle();
                         arguments.putString(TeamDetailFragment.ARG_ITEM_ID, holder.mItem.id);
                         TeamDetailFragment fragment = new TeamDetailFragment();
@@ -225,7 +232,7 @@ public class TeamListActivity extends AppCompatActivity {
 
                 final EditText editText = (EditText) promptView.findViewById(R.id.editText2);
                 // setup a dialog window
-                alertDialogBuilder.setCancelable(false)
+                alertDialogBuilder.setCancelable(true)
                         .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 inputTeamName = editText.getText().toString();
@@ -263,13 +270,6 @@ public class TeamListActivity extends AppCompatActivity {
                 // create an alert dialog
                 AlertDialog alert = alertDialogBuilder.create();
                 alert.show();
-
-
-
-
-//                addNewTeam(view);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
 
@@ -290,7 +290,7 @@ public class TeamListActivity extends AppCompatActivity {
 
                 final EditText editText = (EditText) promptView.findViewById(R.id.editText2);
                 // setup a dialog window
-                alertDialogBuilder.setCancelable(false)
+                alertDialogBuilder.setCancelable(true)
                         .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 inputPlayerName = editText.getText().toString();
@@ -304,20 +304,6 @@ public class TeamListActivity extends AppCompatActivity {
                                 }else{
                                     Toast.makeText(TeamListActivity.this,inputPlayerName+" already exists on this team", Toast.LENGTH_LONG).show();
                                 }
-
-
-
-
-
-//                                Toast.makeText(TeamDetailActivity.this,teamName, Toast.LENGTH_LONG).show();
-
-
-//                                    Toast.makeText(TeamDetailActivity.this,inputPlayerName+" successfully added!", Toast.LENGTH_LONG).show();
-
-                                //add to master/detail flow list
-                                // dbHandler.putTeamsInList();
-
-
 
 //                                //refresh the view
                                 Intent intent = getIntent();
