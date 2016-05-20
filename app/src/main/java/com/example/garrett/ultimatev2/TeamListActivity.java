@@ -45,6 +45,7 @@ public class TeamListActivity extends AppCompatActivity {
     private String inputTeamName;
     private DBHandler dbHandler;
     private String inputPlayerName;
+    TeamDetailFragment fragment;
 
 
     @Override
@@ -154,18 +155,20 @@ public class TeamListActivity extends AppCompatActivity {
                         selectedPos = position;
                         notifyItemChanged(selectedPos);
 
-                        FloatingActionButton fabPlayer;
-                        fabPlayer = (FloatingActionButton) findViewById(R.id.fabRight);
-                        addPlayerFAB(fabPlayer);
-                        fabPlayer.setVisibility(View.VISIBLE);
 
                         Bundle arguments = new Bundle();
                         arguments.putString(TeamDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-                        TeamDetailFragment fragment = new TeamDetailFragment();
+                        fragment = new TeamDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.team_detail_container, fragment)
                                 .commit();
+
+                        FloatingActionButton fabPlayer;
+                        fabPlayer = (FloatingActionButton) findViewById(R.id.fabRight);
+                        addPlayerFAB(fabPlayer, holder.mItem.id);
+                        fabPlayer.setVisibility(View.VISIBLE);
+
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, TeamDetailActivity.class);
@@ -259,7 +262,7 @@ public class TeamListActivity extends AppCompatActivity {
 
     }
 
-    public void addPlayerFAB(FloatingActionButton fab){
+    public void addPlayerFAB(FloatingActionButton fab, final String holderItemId){
 
         final Globals globalVariable = (Globals) getApplicationContext();
 
@@ -289,11 +292,22 @@ public class TeamListActivity extends AppCompatActivity {
                                     Toast.makeText(TeamListActivity.this,inputPlayerName+" already exists on this team", Toast.LENGTH_LONG).show();
                                 }
 
-//                                //refresh the view
+                                if(mTwoPane){
+                                    Bundle arguments = new Bundle();
+                                    arguments.putString(TeamDetailFragment.ARG_ITEM_ID, holderItemId);
+                                    fragment = new TeamDetailFragment();
+                                    fragment.setArguments(arguments);
+                                    getSupportFragmentManager().beginTransaction()
+                                            .replace(R.id.team_detail_container, fragment)
+                                            .commit();
+                                }else{
+
+                                    //refresh the view
                                 Intent intent = getIntent();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 finish();
                                 startActivity(intent);
+                                }
 
                             }
                         })

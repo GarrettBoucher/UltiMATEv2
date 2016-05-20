@@ -28,6 +28,7 @@ public class TeamDetailActivity extends AppCompatActivity {
 
     private String inputPlayerName;
     private DBHandler dbHandler;
+    TeamDetailFragment fragment;
     ListView myList;
 
 
@@ -75,25 +76,20 @@ public class TeamDetailActivity extends AppCompatActivity {
                                     Toast.makeText(TeamDetailActivity.this,inputPlayerName+" already exists on this team", Toast.LENGTH_LONG).show();
                                 }
 
+                                Bundle arguments = new Bundle();
+                                arguments.putString(TeamDetailFragment.ARG_ITEM_ID,
+                                        getIntent().getStringExtra(TeamDetailFragment.ARG_ITEM_ID));
+                                fragment = new TeamDetailFragment();
+                                fragment.setArguments(arguments);
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.team_detail_container, fragment)
+                                        .commit();
 
-
-
-
-//                                Toast.makeText(TeamDetailActivity.this,teamName, Toast.LENGTH_LONG).show();
-
-
-//                                    Toast.makeText(TeamDetailActivity.this,inputPlayerName+" successfully added!", Toast.LENGTH_LONG).show();
-
-                                    //add to master/detail flow list
-                                   // dbHandler.putTeamsInList();
-
-
-
-//                                //refresh the view
-                                Intent intent = getIntent();
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                finish();
-                                startActivity(intent);
+////                                //refresh the view
+//                                Intent intent = getIntent();
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                                finish();
+//                                startActivity(intent);
 
                             }
                         })
@@ -131,7 +127,7 @@ public class TeamDetailActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putString(TeamDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(TeamDetailFragment.ARG_ITEM_ID));
-            TeamDetailFragment fragment = new TeamDetailFragment();
+            fragment = new TeamDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.team_detail_container, fragment)
