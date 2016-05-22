@@ -37,15 +37,12 @@ import java.util.List;
  */
 public class TeamListActivity extends AppCompatActivity {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
-    private boolean mTwoPane;
+    private boolean mTwoPane;    //Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
     private String inputTeamName;
     private DBHandler dbHandler;
     private String inputPlayerName;
     TeamDetailFragment fragment;
+    SimpleItemRecyclerViewAdapter adapter;
 
 
     @Override
@@ -110,7 +107,8 @@ public class TeamListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(TeamContent.ITEMS));
+        adapter = new SimpleItemRecyclerViewAdapter(TeamContent.ITEMS);
+        recyclerView.setAdapter(adapter);
     }
 
     public class SimpleItemRecyclerViewAdapter
@@ -238,12 +236,15 @@ public class TeamListActivity extends AppCompatActivity {
                                     Toast.makeText(TeamListActivity.this,inputTeamName+" already exists", Toast.LENGTH_LONG).show();
                                 }
 
+                                View recyclerView = findViewById(R.id.team_list);
+                                assert recyclerView != null;
+                                setupRecyclerView((RecyclerView) recyclerView);
 
 //                                //refresh the view
-                                Intent intent = getIntent();
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                finish();
-                                startActivity(intent);
+//                                Intent intent = getIntent();
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                                finish();
+//                                startActivity(intent);
 
                             }
                         })
@@ -301,12 +302,13 @@ public class TeamListActivity extends AppCompatActivity {
                                             .replace(R.id.team_detail_container, fragment)
                                             .commit();
                                 }else{
+//                                    adapter.notifyDataSetChanged();
 
                                     //refresh the view
-                                Intent intent = getIntent();
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                finish();
-                                startActivity(intent);
+//                                Intent intent = getIntent();
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                                finish();
+//                                startActivity(intent);
                                 }
 
                             }
