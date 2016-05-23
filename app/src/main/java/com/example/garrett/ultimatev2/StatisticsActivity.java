@@ -42,7 +42,7 @@ public class StatisticsActivity extends AppCompatActivity {
         Globals globalVariable = (Globals) getApplicationContext();
         setContentView(R.layout.activity_statistics);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(globalVariable.getTitle());
+        toolbar.setTitle(globalVariable.getViewGame().get_gamename());
         setSupportActionBar(toolbar);
 
         TextView homeTeam = (TextView)findViewById(R.id.textViewHomeTeam2);
@@ -50,35 +50,14 @@ public class StatisticsActivity extends AppCompatActivity {
         TextView homeScore = (TextView)findViewById(R.id.textViewHomeScore2);
         TextView awayScore = (TextView)findViewById(R.id.textViewOpponentScore2);
 
-
-//        ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView2);
-//        ScrollView scrollView = new ScrollView(this);
-//        HorizontalScrollView horoScrollView = new HorizontalScrollView(this);
-
-        if(!globalVariable.isViewParametersDefined()){
-            chooseTeam();
-        }else{
-            TableLayout tableLayout = (TableLayout)findViewById(R.id.table);
-            buildTable(globalVariable.getViewGame(), tableLayout);
-
-            homeTeam.setText(globalVariable.getViewGame().get_teamname());
-            awayTeam.setText(globalVariable.getViewGame().get_opponent());
-            String opponentScore = String.valueOf(globalVariable.getViewGame().get_opponentscore());
-            awayScore.setText(opponentScore);
-            String teamScore = String.valueOf(globalVariable.getViewGame().get_teamscore());
-            homeScore.setText(teamScore);
-
-
-//            TableLayout tableLayout = buildTable(globalVariable.getViewGame());
-//            horoScrollView.addView(tableLayout);
-//            scrollView.addView(horoScrollView);
-//
-//            setContentView(scrollView);
-        }
-
-
-
-
+        TableLayout tableLayout = (TableLayout)findViewById(R.id.table);
+        buildTable(globalVariable.getViewGame(), tableLayout);
+        homeTeam.setText(globalVariable.getViewGame().get_teamname());
+        awayTeam.setText(globalVariable.getViewGame().get_opponent());
+        String opponentScore = String.valueOf(globalVariable.getViewGame().get_opponentscore());
+        awayScore.setText(opponentScore);
+        String teamScore = String.valueOf(globalVariable.getViewGame().get_teamscore());
+        homeScore.setText(teamScore);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -225,16 +204,16 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
                 int id = j + (i*6);
-                Log.d("TAG", "-___>" + id);
+//                Log.d("TAG", "-___>" + id);
                 if (i == 0) {
-                    Log.d("TAG", "set Column Headers");
+//                    Log.d("TAG", "set Column Headers");
                     textView.setText(columnHeaders[j]);
-                    Log.i("Column Header", columnHeaders[j]);
+//                    Log.i("Column Header", columnHeaders[j]);
                     textView.setTextSize(22);
                 } else {
-                    Log.d("TAG", "Set Row");
+//                    Log.d("TAG", "Set Row");
                     textView.setText(performancesList.get(i-1)[j]);
-                    Log.i("Row Data", performancesList.get(i-1)[j]);
+//                    Log.i("Row Data", performancesList.get(i-1)[j]);
                     textView.setTextSize(22);
 
 

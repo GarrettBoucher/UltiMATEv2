@@ -3,8 +3,6 @@ package com.example.garrett.ultimatev2;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,7 +21,7 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.garrett.ultimatev2.dummy.TeamContent;
+import com.example.garrett.ultimatev2.MasterDetailContent.TeamContent;
 
 import java.util.List;
 
@@ -302,7 +300,6 @@ public class TeamListActivity extends AppCompatActivity {
                                             .replace(R.id.team_detail_container, fragment)
                                             .commit();
                                 }else{
-//                                    adapter.notifyDataSetChanged();
 
                                     //refresh the view
 //                                Intent intent = getIntent();

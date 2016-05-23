@@ -49,11 +49,29 @@
         <activity
             android:name=".StatisticsActivity"
             android:label="@string/title_activity_statistics"
+            android:parentActivityName=".GameListActivity"
+            android:theme="@style/UltiMATE_Theme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.garrett.ultimatev2.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".GameListActivity"
+            android:label="@string/title_game_list"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/UltiMATE_Theme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.garrett.ultimatev2.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".GameDetailActivity"
+            android:label="@string/title_game_detail"
+            android:parentActivityName=".GameListActivity"
+            android:theme="@style/UltiMATE_Theme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.garrett.ultimatev2.GameListActivity" />
         </activity>
     </application>
 

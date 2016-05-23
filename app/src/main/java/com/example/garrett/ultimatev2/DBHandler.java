@@ -4,17 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.design.widget.TabLayout;
 import android.util.Log;
-import android.widget.TableRow;
-import android.widget.Toast;
 
-import com.example.garrett.ultimatev2.dummy.TeamContent;
+import com.example.garrett.ultimatev2.MasterDetailContent.TeamContent;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Garrett on 4/19/16.

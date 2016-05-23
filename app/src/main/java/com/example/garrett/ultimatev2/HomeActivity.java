@@ -96,6 +96,12 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //called when the user clicks the view stats button
+    public void goToGameList(View view){
+        Intent intent = new Intent(this, GameListActivity.class);
+        startActivity(intent);
+    }
+
     public void printDatabaseTeams(){
         String dbString = dbHandler.databaseTeamsToString();
         myText.setText(dbString);

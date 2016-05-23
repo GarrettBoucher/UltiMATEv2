@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.garrett.ultimatev2.TeamDetailActivity"
+    tools:context="com.example.garrett.ultimatev2.GameDetailActivity"
     tools:ignore="MergeRootFrame">
 
     <android.support.design.widget.AppBarLayout
@@ -34,24 +34,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/team_detail_container"
+        android:id="@+id/game_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_white_48px"
-        app:layout_anchor="@+id/team_detail_container"
-        app:layout_anchorGravity="top|end" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>

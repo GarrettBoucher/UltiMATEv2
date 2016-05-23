@@ -1,13 +1,4 @@
-package com.example.garrett.ultimatev2.dummy;
-
-import android.app.Application;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.widget.BaseAdapter;
-
-import com.example.garrett.ultimatev2.DBHandler;
-import com.example.garrett.ultimatev2.HomeActivity;
+package com.example.garrett.ultimatev2.MasterDetailContent;
 
 import java.util.ArrayList;
 import java.util.HashMap;

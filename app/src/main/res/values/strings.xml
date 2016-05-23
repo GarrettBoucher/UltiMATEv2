@@ -7,4 +7,6 @@
     <string name="layout">image</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_statistics">StatisticsActivity</string>
+    <string name="title_game_list">Games</string>
+    <string name="title_game_detail">Game Detail</string>
 </resources>
