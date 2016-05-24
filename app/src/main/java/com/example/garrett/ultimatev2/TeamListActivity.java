@@ -14,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -174,6 +175,89 @@ public class TeamListActivity extends AppCompatActivity {
                     }
                 }
             });
+
+            holder.mView.setOnLongClickListener(new View.OnLongClickListener(){
+                @Override
+                public boolean onLongClick(View v){
+//                    Toast.makeText(TeamListActivity.this, "Long Click Position: " + position, Toast.LENGTH_SHORT).show();
+
+                    LayoutInflater layoutInflater = LayoutInflater.from(TeamListActivity.this);
+                    View promptView = layoutInflater.inflate(R.layout.dialog_confirm_scored_on, null);
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TeamListActivity.this);
+                    alertDialogBuilder.setView(promptView);
+
+                    TextView message = (TextView) promptView.findViewById(R.id.textViewConfirmScoredOn);
+                    message.setText(holder.mItem.toString());
+
+                    // setup a dialog window
+                    alertDialogBuilder.setCancelable(true)
+                            .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                Toast.makeText(TeamListActivity.this, "Edit Function", Toast.LENGTH_SHORT).show();
+
+//                                    if(!dbHandler.teamExists(inputTeamName)){
+//                                        //add team to Database
+//                                        Teams team = new Teams(inputTeamName);
+//                                        dbHandler.addTeam(team);
+//                                        Toast.makeText(TeamListActivity.this,inputTeamName+" successfully created", Toast.LENGTH_LONG).show();
+//
+//
+//                                        //add to master/detail flow list
+//                                        dbHandler.putTeamsInList();
+//                                    }else{
+//                                        Toast.makeText(TeamListActivity.this,inputTeamName+" already exists", Toast.LENGTH_LONG).show();
+//                                    }
+//
+//                                    View recyclerView = findViewById(R.id.team_list);
+//                                    assert recyclerView != null;
+//                                    setupRecyclerView((RecyclerView) recyclerView);
+
+
+                                }
+                            })
+                            .setNeutralButton("Delete",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            LayoutInflater layoutInflater = LayoutInflater.from(TeamListActivity.this);
+                                            View promptView = layoutInflater.inflate(R.layout.dialog_confirm_scored_on, null);
+                                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TeamListActivity.this);
+                                            alertDialogBuilder.setView(promptView);
+
+                                            TextView message = (TextView) promptView.findViewById(R.id.textViewConfirmScoredOn);
+                                            message.setText("Are you sure you want to delete '"+holder.mItem.toString()+"'?\n " +
+                                                    "All data associated with this team, including players and games, will be lost.");
+
+
+                                            alertDialogBuilder.setCancelable(true)
+                                                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int id) {
+                                                            Toast.makeText(TeamListActivity.this, "Delete Function", Toast.LENGTH_SHORT).show();
+
+
+
+                                                        }
+                                                    })
+                                                    .setNeutralButton("Cancel",
+                                                            new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog, int id) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            });
+                                            AlertDialog alert = alertDialogBuilder.create();
+                                            alert.show();
+
+
+                                        }
+                                    });
+
+                    // create an alert dialog
+                    AlertDialog alert = alertDialogBuilder.create();
+                    alert.show();
+
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -238,11 +322,6 @@ public class TeamListActivity extends AppCompatActivity {
                                 assert recyclerView != null;
                                 setupRecyclerView((RecyclerView) recyclerView);
 
-//                                //refresh the view
-//                                Intent intent = getIntent();
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                                finish();
-//                                startActivity(intent);
 
                             }
                         })
