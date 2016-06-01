@@ -83,7 +83,6 @@ public class TeamListActivity extends AppCompatActivity {
         View recyclerView = findViewById(R.id.team_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
-//        recyclerView.performClick();
 
     }
 
@@ -232,10 +231,14 @@ public class TeamListActivity extends AppCompatActivity {
                                             alertDialogBuilder.setCancelable(true)
                                                     .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                                         public void onClick(DialogInterface dialog, int id) {
+
+                                                            dbHandler.deleteTeam(holder.mItem.toString());
+
+                                                            View recyclerView = findViewById(R.id.team_list);
+                                                            assert recyclerView != null;
+                                                            setupRecyclerView((RecyclerView) recyclerView);
+                                                            
                                                             Toast.makeText(TeamListActivity.this, "Delete Function", Toast.LENGTH_SHORT).show();
-
-
-
                                                         }
                                                     })
                                                     .setNeutralButton("Cancel",

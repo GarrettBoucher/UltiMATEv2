@@ -794,5 +794,6 @@ public class DBHandler extends SQLiteOpenHelper {
         return performancesList;
     }
 
+
 }
 
