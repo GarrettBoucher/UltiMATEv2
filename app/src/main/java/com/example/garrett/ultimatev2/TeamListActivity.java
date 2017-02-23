@@ -41,7 +41,7 @@ public class TeamListActivity extends AppCompatActivity {
     private DBHandler dbHandler;
     private String inputPlayerName;
     TeamDetailFragment fragment;
-    SimpleItemRecyclerViewAdapter adapter;
+//    SimpleItemRecyclerViewAdapter adapter;
 
 
     @Override
@@ -105,7 +105,7 @@ public class TeamListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
-        adapter = new SimpleItemRecyclerViewAdapter(TeamContent.ITEMS);
+        RecyclerView.Adapter adapter = new SimpleItemRecyclerViewAdapter(TeamContent.ITEMS);
         recyclerView.setAdapter(adapter);
     }
 
@@ -218,37 +218,40 @@ public class TeamListActivity extends AppCompatActivity {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
 
-                                            LayoutInflater layoutInflater = LayoutInflater.from(TeamListActivity.this);
-                                            View promptView = layoutInflater.inflate(R.layout.dialog_confirm_scored_on, null);
-                                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TeamListActivity.this);
-                                            alertDialogBuilder.setView(promptView);
+                                            deleteDialog(holder.mItem.toString());
 
-                                            TextView message = (TextView) promptView.findViewById(R.id.textViewConfirmScoredOn);
-                                            message.setText("Are you sure you want to delete '"+holder.mItem.toString()+"'?\n " +
-                                                    "All data associated with this team, including players and games, will be lost.");
+//                                            LayoutInflater layoutInflater = LayoutInflater.from(TeamListActivity.this);
+//                                            View promptView = layoutInflater.inflate(R.layout.dialog_confirm_scored_on, null);
+//                                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TeamListActivity.this);
+//                                            alertDialogBuilder.setView(promptView);
+//
+//                                            TextView message = (TextView) promptView.findViewById(R.id.textViewConfirmScoredOn);
+//                                            message.setText("Are you sure you want to delete '"+holder.mItem.toString()+"'?\n " +
+//                                                    "All data associated with this team, including players and games, will be lost.");
+//
+//
+//                                            alertDialogBuilder.setCancelable(true)
+//                                                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+//                                                        public void onClick(DialogInterface dialog, int id) {
+//
+//                                                            dbHandler.deleteTeam(holder.mItem.toString());
+//
+//                                                            View recyclerView = findViewById(R.id.team_list);
+//                                                            assert recyclerView != null;
+//                                                            setupRecyclerView((RecyclerView) recyclerView);
+//
+//                                                            Toast.makeText(TeamListActivity.this, "Delete Function", Toast.LENGTH_SHORT).show();
+//                                                        }
+//                                                    })
+//                                                    .setNeutralButton("Cancel",
+//                                                            new DialogInterface.OnClickListener() {
+//                                                                public void onClick(DialogInterface dialog, int id) {
+//                                                                    dialog.cancel();
+//                                                                }
+//                                                            });
+//                                            AlertDialog alert = alertDialogBuilder.create();
+//                                            alert.show();
 
-
-                                            alertDialogBuilder.setCancelable(true)
-                                                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                                                        public void onClick(DialogInterface dialog, int id) {
-
-                                                            dbHandler.deleteTeam(holder.mItem.toString());
-
-                                                            View recyclerView = findViewById(R.id.team_list);
-                                                            assert recyclerView != null;
-                                                            setupRecyclerView((RecyclerView) recyclerView);
-                                                            
-                                                            Toast.makeText(TeamListActivity.this, "Delete Function", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    })
-                                                    .setNeutralButton("Cancel",
-                                                            new DialogInterface.OnClickListener() {
-                                                                public void onClick(DialogInterface dialog, int id) {
-                                                                    dialog.cancel();
-                                                                }
-                                                            });
-                                            AlertDialog alert = alertDialogBuilder.create();
-                                            alert.show();
 
 
                                         }
@@ -286,6 +289,40 @@ public class TeamListActivity extends AppCompatActivity {
                 return super.toString() + " '" + mContentView.getText() + "'";
             }
         }
+    }
+
+    public void deleteDialog(final String teamName){
+        LayoutInflater layoutInflater = LayoutInflater.from(TeamListActivity.this);
+        View promptView = layoutInflater.inflate(R.layout.dialog_confirm_scored_on, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TeamListActivity.this);
+        alertDialogBuilder.setView(promptView);
+
+        TextView message = (TextView) promptView.findViewById(R.id.textViewConfirmScoredOn);
+        message.setText("Are you sure you want to delete '"+teamName+"'?\n " +
+                "All data associated with this team, including players and games, will be lost.");
+
+
+        alertDialogBuilder.setCancelable(true)
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dbHandler.deleteTeam(teamName);
+
+                        View recyclerView = findViewById(R.id.team_list);
+                        assert recyclerView != null;
+                        setupRecyclerView((RecyclerView) recyclerView);
+
+                        Toast.makeText(TeamListActivity.this, "Delete Function", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNeutralButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
     public void addTeamFAB(FloatingActionButton fab){
